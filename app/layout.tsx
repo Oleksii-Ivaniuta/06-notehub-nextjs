@@ -7,6 +7,9 @@ import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 export const metadata: Metadata = {
   title: "NoteHub",
   description: "Home work 1 next js",
+  icons: {
+    icon: '/public/favicon.svg',
+  },
 };
 
 export default function RootLayout({

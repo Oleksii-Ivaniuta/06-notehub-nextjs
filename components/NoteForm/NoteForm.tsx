@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { type NoteFormData } from "@/types/note";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { createNote } from "@/lib/api";
-import iziToast from "izitoast";
+
 
 interface NoteFormProps {
   onClose: () => void;
@@ -28,12 +28,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
       queryClient.invalidateQueries({ queryKey: ["Notes"] });
       onClose();
     },
-    onError: () => {
-      iziToast.error({
-        message: "Error adding note, please try again",
-        position: "topCenter",
-      });
-    },
+    
   });
   const handleSubmit = (values: NoteFormData, actions: FormikHelpers<NoteFormData>) => {
     addNewNote.mutate(values);

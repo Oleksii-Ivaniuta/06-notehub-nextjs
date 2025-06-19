@@ -20,6 +20,7 @@ interface NoteHubSearchParams {
 
 const myToken = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
+
 export async function fetchNotes(
   query: string,
   page: number
@@ -40,6 +41,7 @@ export async function fetchNotes(
     "https://notehub-public.goit.study/api/notes/",
     noteHubSearchParams
   );
+console.log(response.data);
 
   return response.data;
 }
@@ -60,6 +62,18 @@ export async function createNote(note: NoteFormData): Promise<Note> {
   const response = await axios.post<Note>(
     "https://notehub-public.goit.study/api/notes/",
     note,
+    {
+      headers: {
+        authorization: `Bearer ${myToken}`,
+      },
+    }
+  );
+  return response.data;
+}
+
+export async function fetchNoteById(id: number): Promise<Note> {
+  const response = await axios.get<Note>(
+    `https://notehub-public.goit.study/api/notes/${id}`,
     {
       headers: {
         authorization: `Bearer ${myToken}`,
