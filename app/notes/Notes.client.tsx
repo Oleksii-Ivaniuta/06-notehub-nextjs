@@ -38,7 +38,9 @@ export default function NotesClient() {
     setQuery(query);
     setCurrentPage(1);
   };
-    
+  
+  if (loadNotes.isError) return new Error();
+
   return (
     <div className={css.app}>
       <header className={css.toolbar}>

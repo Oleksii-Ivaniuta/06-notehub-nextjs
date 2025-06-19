@@ -41,8 +41,6 @@ export async function fetchNotes(
     "https://notehub-public.goit.study/api/notes/",
     noteHubSearchParams
   );
-console.log(response.data);
-
   return response.data;
 }
 
