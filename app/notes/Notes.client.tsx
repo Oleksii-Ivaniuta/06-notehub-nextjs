@@ -39,7 +39,9 @@ export default function NotesClient() {
     setCurrentPage(1);
   };
   
-  if (loadNotes.isError) return new Error();
+  if (loadNotes.isError) {
+    throw new Error();
+  }
 
   return (
     <div className={css.app}>

@@ -9,7 +9,7 @@ import NotesClient from './Notes.client'
 export default async function Notes() {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
-    queryKey: ['Notes', '', 1],
+    queryKey: ['Notes'],
     queryFn: () => fetchNotes('', 1),
   })
 
