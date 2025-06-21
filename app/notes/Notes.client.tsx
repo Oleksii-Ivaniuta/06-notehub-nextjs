@@ -8,8 +8,16 @@ import css from './NotesPage.module.css';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
+import { Note } from '@/types/note';
 
-export default function NotesClient() {
+interface NotesClientProps {
+  initialResponse: {
+    notes: Note[],
+    totalPages: number
+  }
+}
+
+export default function NotesClient({initialResponse} : NotesClientProps) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [query, setQuery] = useState<string>('');
   const [debouncedQuery] = useDebounce<string>(query, 1000);
@@ -18,6 +26,7 @@ export default function NotesClient() {
   const loadNotes = useQuery({
     queryKey: ['Notes', debouncedQuery, currentPage],
     queryFn: () => fetchNotes(debouncedQuery, currentPage),
+    initialData: initialResponse,
     placeholderData: keepPreviousData,
     refetchOnMount: false,
     });
